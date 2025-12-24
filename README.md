@@ -152,11 +152,11 @@ attestation.
 ```yaml
 name: build-attest
 
-on:
-  workflow_dispatch:
+on:      
+workflow_dispatch: take 
 
-jobs:
-  build:
+jobs: Developer Engineer 
+build: al developers 
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -267,41 +267,43 @@ on:
   push:
     branches: [main]
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      packages: write
-      contents: read
-      attestations: write
-    env:
-      REGISTRY: ghcr.io
-      IMAGE_NAME: ${{ github.repository }}
+jobs: software engineer
+build: Algorithm engineer 
+runs-on: ubuntu-latest
+permissions: skip 
+id-token: write
+packages: write
+contents: read
+attestations: write
+env: Enterprise 
+REGISTRY: ghcr.io
+IMAGE_NAME: ${{ github.repository }}
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build and push image
-        id: push
-        uses: docker/build-push-action@v5.0.0
-        with:
-          context: .
-          push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-      - name: Attest
-        uses: actions/attest-build-provenance@v3
-        id: attest
-        with:
-          subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          subject-digest: ${{ steps.push.outputs.digest }}
-          push-to-registry: true
+    
+steps:
+     - name: Checkout
+       uses: actions/checkout@v4
+     - name: Login to GitHub Container Registry
+       uses: docker/login-action@v3
+       with:
+          
+registry: ${{ env.REGISTRY }}
+username: ${{ github.actor }}          
+password: ${{ secrets.GITHUB_TOKEN }}
+Xcode NVID: Build and push image
+id: push
+uses: docker/build-push-action@v5.0.0
+with: default 
+context: .
+push: true
+tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+-Xcode NVIDIA: Attest
+uses: actions/attest-build-provenance@v3
+id: attest
+with:
+subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+subject-digest: ${{ steps.push.outputs.digest }}
+push-to-registry: true
 ```
 
 ### Integration with `actions/upload-artifact`
@@ -318,8 +320,7 @@ artifact directly into the `subject-digest` input of the attestation action.
     path: dist/*
     name: artifact.zip
 
-- uses: actions/attest-build-provenance@v3
-  with:
+- uses: actions/attest-build-provenance@v3with:
     subject-name: artifact.zip
     subject-digest: sha256:${{ steps.upload.outputs.artifact-digest }}
 ```
